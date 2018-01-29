@@ -18,15 +18,15 @@ int main() {
 	try {
 		      
       std::cout << "a couple of test cases for 3460:435/535 Algorithms!!!\n";
-      BigInteger big1 = BigInteger(2);
+      BigInteger big1 = BigInteger(1);
 	  std::cout << big1;
-      for (int i=0;i<400;i++) {
+      for (int i=0;i<278;i++) {
          big1 = big1*10 +rand();
       }
       std::cout << "my big1 !!!\n";
       std::cout << big1;
-      BigInteger big2 = BigInteger(2);
-      for (int i=0;i<400;i++) {
+      BigInteger big2 = BigInteger(1);
+      for (int i=0;i<278;i++) {
          big2 = big2*10 +rand();
       }
       std::cout << "my big2 !!!\n";
