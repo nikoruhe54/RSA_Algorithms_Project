@@ -1,5 +1,11 @@
 // You need to complete this program for a part of your first project.
-
+//
+// Niko Ruhe
+// RSA Project Part I
+// Dr. Duan
+// Algorithms Class
+// Spring2018
+//
 // Standard libraries
 #include <string>
 #include <iostream>
