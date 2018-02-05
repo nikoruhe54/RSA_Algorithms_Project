@@ -53,6 +53,7 @@ int main() {
 	  }
       std::cout << "my big1 !!!\n";
       std::cout << big1;
+	  std::cout << "\n";
       BigInteger big2 = BigInteger(1);
 	  while (1) {
 		  for (int i = 0; i < 278; i++) {
@@ -69,6 +70,7 @@ int main() {
 
       std::cout << "my big2 !!!\n";
       std::cout << big2;
+	  std::cout << "\n";
 	  std::cout << "The two numbers are both prime \n";
 	  /*
       std::cout << "my big3 = big1*big2 !!!\n";
