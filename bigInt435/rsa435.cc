@@ -15,6 +15,20 @@
 // `BigIntegerLibrary.hh' includes all of the library headers.
 #include "BigIntegerLibrary.hh"
 
+bool fermat(BigInteger maybePrime) {
+	/* use this test to determine if the number is prime */
+	BigInteger a1 = 2, a2 = 7;
+	std::string convertString = bigIntegerToString(maybePrime);
+	BigUnsigned testNum = stringToBigUnsigned(convertString);
+	BigUnsigned answer = modexp(a1, testNum - 1, testNum);
+	if (answer == 1) {
+		answer = modexp(a2, testNum - 1, testNum);
+		if (answer == 1) {
+			return true;
+		}
+	}
+	return false;
+}
 
 int main() {
 	/* The library throws `const char *' error messages when things go
@@ -72,18 +86,4 @@ int main() {
 	return 0;
 }
 
-bool fermat(BigInteger maybePrime) {
-	/* use this test to determine if the number is prime */
-	BigInteger a1 = 2, a2 = 7;
-	std::string convertString = bigIntegerToString(maybePrime);
-	BigUnsigned testNum = stringToBigUnsigned(convertString);
-	BigUnsigned answer = modexp(a1, testNum - 1, testNum);
-	if (answer == 1) {
-		answer = modexp(a2, testNum - 1, testNum);
-		if (answer == 1) {
-			return true;
-		}
-	}
-	return false;
-}
 
