@@ -39,7 +39,7 @@ int main() {
       BigUnsigned big1 = BigUnsigned(1);
 	  BigInteger a1 = 2, a2 = 7;
 	  while (1) {
-		  for (int i = 0; i < 278; i++) {
+		  for (int i = 0; i < 2; i++) {
 			  big1 = big1 * 10 + (rand() % 10);
 		  }
 		  big1 = (big1 * 10) + 7;
@@ -64,7 +64,7 @@ int main() {
 	  std::cout << "\n";
       BigUnsigned big2 = BigUnsigned(1);
 	  while (1) {
-		  for (int i = 0; i < 278; i++) {
+		  for (int i = 0; i < 2; i++) {
 			  big2 = big2 * 10 + (rand() % 10);
 		  }
 		  big2 = (big2 * 10) + 7;
