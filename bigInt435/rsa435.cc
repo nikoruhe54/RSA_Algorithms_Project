@@ -40,8 +40,17 @@ int main() {
 	  BigInteger a1 = 2, a2 = 7;
 	  while (1) {
 		  for (int i = 0; i < 278; i++) {
-			  big1 = big1 * 10 + rand();
+			  big1 = big1 * 10 + (rand() % 10);
 		  }
+		  big1 = (big1 * 10) + 7;
+		  /*
+		  if (big1 % 2 == 0) {
+			  big1 += 1;
+		  }
+		  if (big1 % 5 == 0) {
+			  big1 += 2;
+		  }
+		  */
 		  if (fermat(big1, a1, a2)) {
 			  //big1 is prime, move on
 			  break;
@@ -56,8 +65,9 @@ int main() {
       BigUnsigned big2 = BigUnsigned(1);
 	  while (1) {
 		  for (int i = 0; i < 278; i++) {
-			  big2 = big2 * 10 + rand();
+			  big2 = big2 * 10 + (rand() % 10);
 		  }
+		  big2 = (big2 * 10) + 7;
 		  if (fermat(big2, a1, a2)) {
 			  //big2 is prime, move on
 			  break;
