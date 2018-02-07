@@ -16,14 +16,11 @@
 // `BigIntegerLibrary.hh' includes all of the library headers.
 #include "BigIntegerLibrary.hh"
 
-bool fermat(BigInteger maybePrime) {
+bool fermat(BigUnsigned maybePrime, BigInteger a1, BigInteger a2) {
 	/* use this test to determine if the number is prime */
-	BigInteger a1 = 2, a2 = 7;
-	std::string convertString = bigIntegerToString(maybePrime);
-	BigUnsigned testNum = stringToBigUnsigned(convertString);
-	BigUnsigned answer = modexp(a1, testNum - 1, testNum);
+	BigUnsigned answer = modexp(a1, maybePrime - 1, maybePrime);
 	if (answer == 1) {
-		answer = modexp(a2, testNum - 1, testNum);
+		answer = modexp(a2, maybePrime- 1, maybePrime);
 		if (answer == 1) {
 			return true;
 		}
@@ -39,33 +36,34 @@ int main() {
 	try {
 		      
       std::cout << "a couple of test cases for 3460:435/535 Algorithms!!!\n";
-      BigInteger big1 = BigInteger(1);
+      BigUnsigned big1 = BigUnsigned(1);
+	  BigInteger a1 = 2, a2 = 7;
 	  while (1) {
 		  for (int i = 0; i < 278; i++) {
 			  big1 = big1 * 10 + rand();
 		  }
-		  if (fermat(big1)) {
+		  if (fermat(big1, a1, a2)) {
 			  //big1 is prime, move on
 			  break;
 		  }
 		  else {
-			  big1 = BigInteger(1);
+			  big1 = BigUnsigned(1);
 		  }
 	  }
       std::cout << "my big1 !!!\n";
       std::cout << big1;
 	  std::cout << "\n";
-      BigInteger big2 = BigInteger(1);
+      BigUnsigned big2 = BigUnsigned(1);
 	  while (1) {
 		  for (int i = 0; i < 278; i++) {
 			  big2 = big2 * 10 + rand();
 		  }
-		  if (fermat(big2)) {
+		  if (fermat(big2, a1, a2)) {
 			  //big2 is prime, move on
 			  break;
 		  }
 		  else {
-			  big2 = BigInteger(1);
+			  big2 = BigUnsigned(1);
 		  }
 	  }
 
