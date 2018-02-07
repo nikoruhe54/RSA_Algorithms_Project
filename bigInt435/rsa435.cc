@@ -10,6 +10,7 @@
 #include <string>
 #include <iostream>
 #include <stdlib.h> 
+#include <fstream>
 
 
 // `BigIntegerLibrary.hh' includes all of the library headers.
@@ -72,6 +73,11 @@ int main() {
       std::cout << big2;
 	  std::cout << "\n";
 	  std::cout << "The two numbers are both prime \n";
+
+	  std::ofstream outfile("p_q.txt");
+	  outfile << big1 << std::endl;
+	  outfile << big2 << std::endl;
+	  outfile.close();
 	  /*
       std::cout << "my big3 = big1*big2 !!!\n";
       BigInteger big3 = big1*big2;
