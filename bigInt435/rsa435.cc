@@ -28,11 +28,23 @@ bool fermat(BigUnsigned maybePrime, BigInteger a1, BigInteger a2) {
 	return false;
 }
 
-BigUnsigned getD(BigUnsigned phi, BigUnsigned e) {
+BigUnsigned checkE(BigUnsigned phi, BigUnsigned e) {
 	if (e == 0) {
 		return phi;
 	}
-	return getD(e, phi % e);
+	return checkE(e, phi % e);
+}
+
+BigUnsigned createPrivateKey(BigUnsigned e, BigUnsigned phi) {
+	BigUnsigned i = 1, x;
+	while (1) {
+		x = (e * i - 1) % phi;
+		if (x == 0) {
+			return i;
+			break;
+		}
+		i++;
+	}
 }
 
 int main() {
@@ -45,19 +57,12 @@ int main() {
       std::cout << "a couple of test cases for 3460:435/535 Algorithms!!!\n";
       BigUnsigned big1 = BigUnsigned(1);
 	  BigInteger a1 = 2, a2 = 7;
-	  while (1) {
+	  /* while (1) {
 		  for (int i = 0; i < 278; i++) {
 			  big1 = big1 * 10 + (rand() % 10);
 		  }
 		  big1 = (big1 * 10) + 7;
-		  /*
-		  if (big1 % 2 == 0) {
-			  big1 += 1;
-		  }
-		  if (big1 % 5 == 0) {
-			  big1 += 2;
-		  }
-		  */
+
 		  if (fermat(big1, a1, a2)) {
 			  //big1 is prime, move on
 			  break;
@@ -66,11 +71,13 @@ int main() {
 			  big1 = BigUnsigned(1);
 		  }
 	  }
+	  */
+	  BigUnsigned big1 = 37;
       std::cout << "my big1 !!!\n";
       std::cout << big1;
 	  std::cout << "\n";
       BigUnsigned big2 = BigUnsigned(1);
-	  while (1) {
+	  /* while (1) {
 		  for (int i = 0; i < 278; i++) {
 			  big2 = big2 * 10 + (rand() % 10);
 		  }
@@ -83,7 +90,8 @@ int main() {
 			  big2 = BigUnsigned(1);
 		  }
 	  }
-
+	  */
+	  BigUnsigned big2 = 17;
       std::cout << "my big2 !!!\n";
       std::cout << big2;
 	  std::cout << "\n";
@@ -101,8 +109,16 @@ int main() {
       std::cout << n;
 	  std::cout << std::endl;
 
-	  BigUnsigned e = 65537; //prime number stored as public key
-	  BigUnsigned d = getD(a, e);
+	  //BigUnsigned e = 65537; //prime number stored as public key
+	  BigUnsigned e = 7;
+	  if (checkE(a, e) == 1) {
+		  std::cout << "Good Public Key \n";
+	  }
+
+	  BigUnsigned d = createPrivateKey(e, a);
+
+	  std::cout << "The private key is: \n";
+	  std::cout << d;
 
 	  std::ofstream outfile2("e_n.txt");
 	  outfile2 << e << std::endl;
