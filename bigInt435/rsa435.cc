@@ -104,13 +104,13 @@ int main() {
 	  BigUnsigned e = 65537; //prime number stored as public key
 	  BigUnsigned d = getD(a, e);
 
-	  std::ofstream outfile("e_n.txt");
-	  outfile << e << std::endl;
-	  outfile.close();
+	  std::ofstream outfile2("e_n.txt");
+	  outfile2 << e << std::endl;
+	  outfile2.close();
 
-	  std::ofstream outfile("d_n.txt");
-	  outfile << d << std::endl;
-	  outfile.close();
+	  std::ofstream outfile3("d_n.txt");
+	  outfile3 << d << std::endl;
+	  outfile3.close();
 
 	  /*
       std::cout << "my big3/big2 !!!\n";
