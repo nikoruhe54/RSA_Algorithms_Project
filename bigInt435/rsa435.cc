@@ -55,7 +55,7 @@ int main() {
 	try {
 		      
       std::cout << "a couple of test cases for 3460:435/535 Algorithms!!!\n";
-      BigUnsigned big1 = BigUnsigned(1);
+      //BigUnsigned big1 = BigUnsigned(1);
 	  BigInteger a1 = 2, a2 = 7;
 	  /* while (1) {
 		  for (int i = 0; i < 278; i++) {
@@ -76,7 +76,7 @@ int main() {
       std::cout << "my big1 !!!\n";
       std::cout << big1;
 	  std::cout << "\n";
-      BigUnsigned big2 = BigUnsigned(1);
+      //BigUnsigned big2 = BigUnsigned(1);
 	  /* while (1) {
 		  for (int i = 0; i < 278; i++) {
 			  big2 = big2 * 10 + (rand() % 10);
