@@ -57,7 +57,7 @@ int main() {
       std::cout << "a couple of test cases for 3460:435/535 Algorithms!!!\n";
       BigUnsigned big1 = BigUnsigned(1);
 	  BigInteger a1 = 2, a2 = 7;
-	   while (1) {
+	   /*while (1) {
 		  for (int i = 0; i < 278; i++) {
 			  big1 = big1 * 10 + (rand() % 10);
 		  }
@@ -71,12 +71,13 @@ int main() {
 			  big1 = BigUnsigned(1);
 		  }
 	  }
-	  
+	  */
+	  big1 = 11;
       std::cout << "my big1 !!!\n";
       std::cout << big1;
 	  std::cout << "\n";
       BigUnsigned big2 = BigUnsigned(1);
-	   while (1) {
+/*	   while (1) {
 		  for (int i = 0; i < 278; i++) {
 			  big2 = big2 * 10 + (rand() % 10);
 		  }
@@ -89,7 +90,8 @@ int main() {
 			  big2 = BigUnsigned(1);
 		  }
 	  }
-	  
+	*/
+	  big2 = 5;
       std::cout << "my big2 !!!\n";
       std::cout << big2;
 	  std::cout << "\n";
@@ -107,12 +109,12 @@ int main() {
       std::cout << n;
 	  std::cout << std::endl;
 
-	  BigUnsigned e = 65537; //prime number stored as public key
+	  BigUnsigned e = 7; //65537; //prime number stored as public key
 	  if (checkE(a, e) == 1) {
 		  std::cout << "Good Public Key \n";
 	  }
 
-	  BigUnsigned d = createPrivateKey(e, a);
+	  BigUnsigned d = modinv(e, a);
 
 	  std::cout << "The private key is: \n";
 	  std::cout << d;
