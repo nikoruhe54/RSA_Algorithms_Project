@@ -109,8 +109,15 @@ int main() {
 	  if (checkE(a, e) == 1) {
 		  std::cout << "Good Public Key \n";
 	  }
+	  else {
+	          std::cout << "Bad Public Key \n";
+	  }
 
 	  BigUnsigned d = modinv(e, a);
+
+	  if (d < a) {
+		  std::cout << "The public key is less than the totient";
+	  }
 
 	  std::cout << "The private key is: \n";
 	  std::cout << d;
