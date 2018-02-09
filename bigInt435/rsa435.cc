@@ -32,19 +32,10 @@ BigUnsigned checkE(BigUnsigned phi, BigUnsigned e) {
 	if (e == 0) {
 		return phi;
 	}
-	return checkE(e, phi % e);
-}
-
-BigUnsigned createPrivateKey(BigUnsigned e, BigUnsigned phi) {
-	BigUnsigned i = 1, x;
-	while (1) {
-		x = (e * i - 1) % phi;
-		if (x == 0) {
-			return i;
-			break;
-		}
-		i++;
+	else if(phi == 0){
+		return 0;
 	}
+	return checkE(e, phi % e);
 }
 
 int main() {
@@ -71,7 +62,8 @@ int main() {
 			  big1 = BigUnsigned(1);
 		  }
 	  }
-	  
+	  //test case
+	  //big1 = 11;
       std::cout << "my big1 !!!\n";
       std::cout << big1;
 	  std::cout << "\n";
@@ -89,7 +81,8 @@ int main() {
 			  big2 = BigUnsigned(1);
 		  }
 	  }
-	
+	  //test case
+	  //big2 = 5;
       std::cout << "my big2 !!!\n";
       std::cout << big2;
 	  std::cout << "\n";
@@ -101,13 +94,18 @@ int main() {
 	  outfile.close();
 
 	  BigUnsigned a = (big1 - 1) * (big2 - 1);
-	  
+	  //test case
+	  //a = 40;
       std::cout << "n = big1*big2 !!!\n";
       BigUnsigned n = big1*big2;
+	  //test case
+	  //n = 55;
       std::cout << n;
 	  std::cout << std::endl;
 
 	  BigUnsigned e = 65537; //prime number stored as public key
+	  //test case
+	  //e = 7;
 	  if (checkE(a, e) == 1) {
 		  std::cout << "Good Public Key \n";
 	  }
