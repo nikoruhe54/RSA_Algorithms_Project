@@ -29,6 +29,7 @@ bool fermat(BigUnsigned maybePrime, BigInteger a1, BigInteger a2) {
 }
 
 BigUnsigned checkE(BigUnsigned phi, BigUnsigned e) {
+	//make sure the gcd of the public key and the totient is 1
 	if (e == 0) {
 		return phi;
 	}
@@ -106,6 +107,8 @@ int main() {
 	  BigUnsigned e = 65537; //prime number stored as public key
 	  //test case
 	  //e = 7;
+
+	  //check to see if e is relatively prime to a (the totient)
 	  if (checkE(a, e) == 1) {
 		  std::cout << "Good Public Key \n";
 	  }
@@ -116,7 +119,7 @@ int main() {
 	  BigUnsigned d = modinv(e, a);
 
 	  if (d < a) {
-		  std::cout << "The public key is less than the totient";
+		  std::cout << "The public key is less than the totient, good \n";
 	  }
 
 	  std::cout << "The private key is: \n";
