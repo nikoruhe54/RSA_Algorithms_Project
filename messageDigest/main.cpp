@@ -13,9 +13,8 @@ sha256('grape'): 0f78fcc486f5315418fbf095e71c0675ee07d318e5ac4d150050cd8e5796649
 using std::string;
 using std::cout;
 using std::endl;
- 
-int main(int argc, char *argv[])
-{
+
+void s() {
 	std::string filename = "test.txt"; //test.jpg test.png etc.
 	std::ifstream myfile(filename.c_str(), std::ios::binary);
 	std::streampos begin, end;
@@ -36,9 +35,9 @@ int main(int argc, char *argv[])
 	std::cout << "\nthe content \n";
 
 	string output01 = sha256(str);
- 
+
 	//convert the signature to a bigUnsigned
-    cout << "sha256('"<< str << "'):" << output01 << endl;
+	cout << "sha256('" << str << "'):" << output01 << endl;
 	BigUnsigned sig01 = stringToBigUnsigned(output01);
 
 	//import the private key and n
@@ -61,6 +60,10 @@ int main(int argc, char *argv[])
 	std::ofstream signatureOutFile("file.txt.signature");
 	signatureOutFile << signature01 << std::endl;
 	signatureOutFile.close();
+}
 
-    return 0;
+int main(int argc, char *argv[])
+{
+	s();
+	return 0;
 }
