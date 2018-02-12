@@ -52,7 +52,7 @@ testsuite-cleanfiles = \
 
 # Components of the program.
 program = sha256
-program-objects = shaAlgorithm.o
+program-objects = main.o
 
 # Conservatively assume all the program source files depend on all the library
 # headers.  You can change this if it is not the case.
