@@ -49,14 +49,18 @@ int main(int argc, char *argv[])
 	string d_str, n_str;
 	std::getline(privateKeyFile, d_str);
 	std::getline(privateKeyFile, n_str);
-	cout << d_str << endl;
-	cout << n_str << endl;
 	BigUnsigned privateKey = stringToBigUnsigned(d_str);
 	BigUnsigned n = stringToBigUnsigned(n_str);
 
 	//apply signature to output01
 	BigUnsigned signature01 = modexp(sig01, privateKey, n);
-	cout << "made it to modexp \n";
+	cout << "here's the signature \n";
 	cout << signature01 << endl;
+
+	//save the signature to a file
+	std::ofstream signatureOutFile("file.txt.signature");
+	signatureOutFile << signature01 << std::endl;
+	signatureOutFile.close();
+
     return 0;
 }
