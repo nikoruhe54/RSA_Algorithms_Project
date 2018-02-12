@@ -34,9 +34,10 @@ int main(int argc, char *argv[])
 	std::cout << str;
 	std::cout << "\nthe content ";
 
-    string input = "grapeJuice    sha256('grapeJuice'):0f78fcc486f5315418fbf095e71c0675ee07d318e5ac4d150050cd8e57966496";
-    string output1 = sha256(input);
+	string output01 = sha256(str);
+    //string input = "grapeJuice    sha256('grapeJuice'):0f78fcc486f5315418fbf095e71c0675ee07d318e5ac4d150050cd8e57966496";
+    //string output1 = sha256(input);
  
-    cout << "sha256('"<< input << "'):" << output1 << endl;
+    cout << "sha256('"<< str << "'):" << output01 << endl;
     return 0;
 }
