@@ -8,6 +8,7 @@ sha256('grape'): 0f78fcc486f5315418fbf095e71c0675ee07d318e5ac4d150050cd8e5796649
 #include <iostream>
 #include <fstream>
 #include "sha256.h"
+#include "BigIntegerLibrary.hh"
 
 using std::string;
 using std::cout;
@@ -32,12 +33,24 @@ int main(int argc, char *argv[])
 	//check what's in the block
 	string str(memblock);
 	std::cout << str;
-	std::cout << "\nthe content ";
+	std::cout << "\nthe content \n";
 
 	string output01 = sha256(str);
-    //string input = "grapeJuice    sha256('grapeJuice'):0f78fcc486f5315418fbf095e71c0675ee07d318e5ac4d150050cd8e57966496";
-    //string output1 = sha256(input);
  
+	//convert the signature to a bigUnsigned
     cout << "sha256('"<< str << "'):" << output01 << endl;
+	BigUnsigned sig01 = stringToBigUnsigned(output01);
+
+	//import the private key and n
+	std::ifstream privateKeyFile;
+	privateKeyFile.open("d_n.txt");
+	string d_str, n_str;
+	std::getline(privateKeyFile, d_str);
+	std::getline(privateKeyFile, n_str);
+	BigUnsigned privateKey = stringToBigUnsigned(d_str);
+	BigUnsigned n = stringToBigUnsigned(n_str);
+
+	//apply signature to output01
+	BigUnsigned signature01 = modexp(sig01, privateKey, n);
     return 0;
 }
