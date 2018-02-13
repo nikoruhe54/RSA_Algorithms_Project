@@ -20,6 +20,8 @@ void sign(const char* fileName) {
 	//import the message file as a binary stream
 	std::ifstream inFile(fileName, std::ios::binary);
 	std::string data((std::istreambuf_iterator<char>(inFile)), std::istreambuf_iterator<char>());
+	cout << "here is the raw data" << endl;
+	cout << data << endl;
 	inFile.close();
 	
 	//run the sha256 hash algorithm on the message
