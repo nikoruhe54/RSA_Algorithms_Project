@@ -20,7 +20,7 @@ void sign(const char* fileName) {
 	//import the message file as a binary stream
 	std::ifstream inFile(fileName, std::ios::binary);
 	std::string data((std::istreambuf_iterator<char>(inFile)), std::istreambuf_iterator<char>());
-	if (data.empty()) {
+	if (!inFile.is_open) {
 		//don't try to encrypt invalid/empty files
 		throw("the file entered is either Null or invalid");
 	}
@@ -65,6 +65,10 @@ bool verify(const char* inputFileName, const char* signatureFileName) {
 	//import the "MOST DEFINITELY AUTHENTIC message file" as a binary stream
 	std::ifstream inFile(inputFileName, std::ios::binary);
 	std::string data((std::istreambuf_iterator<char>(inFile)), std::istreambuf_iterator<char>());
+	if (!inFile.is_open) {
+		//don't try to encrypt invalid/empty files
+		throw("the file entered is either Null or invalid");
+	}
 	inFile.close();
 
 	//run the sha256 hashing algorithm on the data
@@ -137,7 +141,7 @@ int main(int argc, char *argv[])
 		}
 	}
 	catch (string errorMsg) {
-		cout << "invalid file name or empty file" << endl;
+		cout << errorMsg << endl;
 	}
 
 	return 0;
