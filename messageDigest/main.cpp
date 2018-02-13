@@ -16,10 +16,9 @@ using std::string;
 using std::cout;
 using std::endl;
 
-void sign(string fileName) {
+void sign(const char* fileName) {
 	//import the message file as a binary stream
-	const char* Hello = "test.txt";
-	std::ifstream inFile(Hello, std::ios::binary);
+	std::ifstream inFile(fileName, std::ios::binary);
 	std::string data((std::istreambuf_iterator<char>(inFile)), std::istreambuf_iterator<char>());
 	inFile.close();
 	
@@ -58,9 +57,9 @@ void sign(string fileName) {
 	cout << "------------------------------------------------------------\n";
 }
 
-bool verify(string inputFileName, string signatureFileName) {
+bool verify(const char* inputFileName, const char* signatureFileName) {
 	//import the "MOST DEFINITELY AUTHENTIC message file" as a binary stream
-	std::ifstream inFile("test.txt", std::ios::binary);
+	std::ifstream inFile(inputFileName, std::ios::binary);
 	std::string data((std::istreambuf_iterator<char>(inFile)), std::istreambuf_iterator<char>());
 	inFile.close();
 
@@ -75,7 +74,7 @@ bool verify(string inputFileName, string signatureFileName) {
 
 	//import the signature file made with the private key
 	std::ifstream sigImportFile;
-	sigImportFile.open("file.txt.signature");
+	sigImportFile.open(signatureFileName);
 
 	//get the signature into a mem register
 	string signatureStr;
