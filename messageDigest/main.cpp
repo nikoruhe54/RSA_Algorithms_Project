@@ -19,6 +19,47 @@ void testImage() {
 	std::string data((std::istreambuf_iterator<char>(fin)), std::istreambuf_iterator<char>());
 	cout << data << endl;
 }
+
+void s2() {
+	std::string filename = "test.png";
+	std::ifstream myfile(filename, std::ios::binary);
+	std::string data((std::istreambuf_iterator<char>(myfile)), std::istreambuf_iterator<char>());
+	myfile.close();
+
+	string output01 = sha256(data);
+
+	//convert the signature to a bigUnsigned
+	BigUnsigned sig01 = stringToBigUnsigned16(output01);
+	cout << "convert to BigUnsigned: \n";
+	cout << sig01 << endl;
+
+	//import the private key and n
+	std::ifstream privateKeyFile;
+	privateKeyFile.open("d_n.txt");
+
+	//format d and n in mem registers to generate a signature
+	string d_str, n_str;
+	std::getline(privateKeyFile, d_str);
+	std::getline(privateKeyFile, n_str);
+	BigUnsigned privateKey = stringToBigUnsigned10(d_str);
+	BigUnsigned n = stringToBigUnsigned10(n_str);
+
+	//apply signature to output01
+	BigUnsigned signature01 = modexp(sig01, privateKey, n);
+	cout << "here is the big signature \n";
+	cout << signature01 << endl;
+
+	//save the signature to a file
+	std::ofstream signatureOutFile("file.txt.signature");
+	signatureOutFile << signature01 << std::endl;
+	signatureOutFile.close();
+
+	cout << "------------------------------------------------------------\n";
+	cout << "-------------------End of s2()-------------------------------\n";
+	cout << "------------------------------------------------------------\n";
+	
+}
+
 void s() {
 	std::string filename = "test03.jpg";
 	//std::string filename = "test.txt"; //test.jpg test.png etc.
@@ -162,6 +203,7 @@ int main(int argc, char *argv[])
 		cout << "------------------------------\n";
 	}
 	*/
-	testImage();
+	//testImage();
+	s2();
 	return 0;
 }
