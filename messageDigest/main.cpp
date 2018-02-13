@@ -16,9 +16,9 @@ using std::string;
 using std::cout;
 using std::endl;
 
-void sign() {
+void sign(string fileName) {
 	//import the message file as a binary stream
-	std::ifstream inFile("test03.jpg", std::ios::binary);
+	std::ifstream inFile(fileName, std::ios::binary);
 	std::string data((std::istreambuf_iterator<char>(inFile)), std::istreambuf_iterator<char>());
 	inFile.close();
 	
@@ -57,9 +57,9 @@ void sign() {
 	cout << "------------------------------------------------------------\n";
 }
 
-bool verify() {
+bool verify(string inputFileName, string signatureFileName) {
 	//import the "MOST DEFINITELY AUTHENTIC message file" as a binary stream
-	std::ifstream inFile("test03.jpg", std::ios::binary);
+	std::ifstream inFile(inputFileName, std::ios::binary);
 	std::string data((std::istreambuf_iterator<char>(inFile)), std::istreambuf_iterator<char>());
 	inFile.close();
 
@@ -74,7 +74,7 @@ bool verify() {
 
 	//import the signature file made with the private key
 	std::ifstream sigImportFile;
-	sigImportFile.open("file.txt.signature");
+	sigImportFile.open(signatureFileName);
 
 	//get the signature into a mem register
 	string signatureStr;
@@ -114,16 +114,27 @@ bool verify() {
 
 int main(int argc, char *argv[])
 {
-	sign();
-	if (verify()) {
-		cout << "------------------------------\n";
-		cout << "the file is authentic \n";
-		cout << "------------------------------\n";
+	try {
+		if (*argv[1] == 's') {
+			sign(argv[2]);
+		}
+
+		if (*argv[1] == 'v') {
+			if (verify(argv[2], argv[3])) {
+				cout << "------------------------------\n";
+				cout << "the file is authentic \n";
+				cout << "------------------------------\n";
+			}
+			else {
+				cout << "------------------------------\n";
+				cout << "the file has been modified \n";
+				cout << "------------------------------\n";
+			}
+		}
 	}
-	else {
-		cout << "------------------------------\n";
-		cout << "the file has been modified \n";
-		cout << "------------------------------\n";
+	catch (string errorMsg) {
+		cout << errorMsg << endl;
 	}
+
 	return 0;
 }
