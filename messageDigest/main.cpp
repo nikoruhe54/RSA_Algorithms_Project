@@ -39,6 +39,8 @@ void s() {
 	//convert the signature to a bigUnsigned
 	cout << "sha256('" << str << "'):" << output01 << endl;
 	BigUnsigned sig01 = stringToBigUnsigned(output01);
+	cout << "convert to BigUnsigned: \n";
+	cout << sig01 << endl;
 
 	//import the private key and n
 	std::ifstream publicKeyFile;
@@ -53,11 +55,17 @@ void s() {
 
 	//apply signature to output01
 	BigUnsigned signature01 = modexp(sig01, publicKey, n);
+	cout << "here is the big signature \n";
+	cout << signature01 << endl;
 
 	//save the signature to a file
 	std::ofstream signatureOutFile("file.txt.signature");
 	signatureOutFile << signature01 << std::endl;
 	signatureOutFile.close();
+
+	cout << "------------------------------------------------------------\n";
+	cout << "-------------------End of s()-------------------------------\n";
+	cout << "------------------------------------------------------------\n";
 }
 
 bool v() {
@@ -81,12 +89,11 @@ bool v() {
 	std::cout << "\nthe content \n";
 
 	string output01 = sha256(str);
-
+	cout << "sha256('" << str << "'):" << output01 << endl;
 
 	//convert the SHA256 to a bigUnsigned
-	//cout << "sha256('" << str << "'):" << output01 << endl;
 	BigUnsigned sig01 = stringToBigUnsigned(output01);
-	cout << "the Sha256(M) is: \n";
+	cout << "the Sha256(M) after converted to bigUnsigned is: \n";
 	cout << sig01 << endl;
 
 	//import the signature file made with the private key
@@ -96,7 +103,11 @@ bool v() {
 	//get the signature into a mem register
 	string signatureStr;
 	std::getline(sigImportFile, signatureStr);
+	cout << "here is the imported signature string: \n";
+	cout << signatureStr << endl;
+	cout << "here is the imported signature after conversion to bigunsigned \n";
 	BigUnsigned Signature = stringToBigUnsigned(signatureStr);
+	cout << Signature << endl;
 	sigImportFile.close();
 
 	//import e_n.txt
@@ -105,8 +116,14 @@ bool v() {
 	string privKeyStr, nStr;
 	std::getline(privateKeyFile, privKeyStr);
 	std::getline(privateKeyFile, nStr);
+	cout << "here is the privateKey string: \n";
+	cout << privKeyStr << endl;
+	cout << "here is the nStr string: \n";
+	cout << nStr << endl;
 	BigUnsigned privateKey = stringToBigUnsigned(privKeyStr);
 	BigUnsigned n = stringToBigUnsigned(nStr);
+	cout << "here is the privateKey after conversion to bigunsigned: \n";
+	cout << "here is the n after converstion to bigunsigned: \n";
 	privateKeyFile.close();
 
 	BigUnsigned decrypt = modexp(Signature, privateKey, n);
