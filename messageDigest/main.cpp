@@ -38,7 +38,7 @@ void s() {
 
 	//convert the signature to a bigUnsigned
 	cout << "sha256('" << str << "'):" << output01 << endl;
-	BigUnsigned sig01 = stringToBigUnsigned(output01);
+	BigUnsigned sig01 = stringToBigUnsigned16(output01);
 	cout << "convert to BigUnsigned: \n";
 	cout << sig01 << endl;
 
@@ -50,8 +50,8 @@ void s() {
 	string d_str, n_str;
 	std::getline(privateKeyFile, d_str);
 	std::getline(privateKeyFile, n_str);
-	BigUnsigned privateKey = stringToBigUnsigned(d_str);
-	BigUnsigned n = stringToBigUnsigned(n_str);
+	BigUnsigned privateKey = stringToBigUnsigned10(d_str);
+	BigUnsigned n = stringToBigUnsigned10(n_str);
 
 	//apply signature to output01
 	BigUnsigned signature01 = modexp(sig01, privateKey, n);
@@ -92,7 +92,7 @@ bool v() {
 	cout << "sha256('" << str << "'):" << output01 << endl;
 
 	//convert the SHA256 to a bigUnsigned
-	BigUnsigned sig01 = stringToBigUnsigned(output01);
+	BigUnsigned sig01 = stringToBigUnsigned16(output01);
 	cout << "the Sha256(M) after converted to bigUnsigned is: \n";
 	cout << sig01 << endl;
 
@@ -106,7 +106,7 @@ bool v() {
 	cout << "here is the imported signature string: \n";
 	cout << signatureStr << endl;
 	cout << "here is the imported signature after conversion to bigunsigned \n";
-	BigUnsigned Signature = stringToBigUnsigned(signatureStr);
+	BigUnsigned Signature = stringToBigUnsigned10(signatureStr);
 	cout << Signature << endl;
 	sigImportFile.close();
 
@@ -120,8 +120,8 @@ bool v() {
 	cout << pubKeyStr << endl;
 	cout << "here is the nStr string: \n";
 	cout << nStr << endl;
-	BigUnsigned publicKey = stringToBigUnsigned(pubKeyStr);
-	BigUnsigned n = stringToBigUnsigned(nStr);
+	BigUnsigned publicKey = stringToBigUnsigned10(pubKeyStr);
+	BigUnsigned n = stringToBigUnsigned10(nStr);
 	cout << "here is the privateKey after conversion to bigunsigned: \n";
 	cout << publicKey << endl;
 	cout << "here is the n after converstion to bigunsigned: \n";
