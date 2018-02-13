@@ -20,7 +20,7 @@ void sign(const char* fileName) {
 	//import the message file as a binary stream
 	std::ifstream inFile(fileName, std::ios::binary);
 	std::string data((std::istreambuf_iterator<char>(inFile)), std::istreambuf_iterator<char>());
-	if (data == "") {
+	if (data.empty()) {
 		throw("the file entered is either Null or invalid");
 	}
 	inFile.close();
