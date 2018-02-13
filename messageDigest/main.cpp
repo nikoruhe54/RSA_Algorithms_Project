@@ -43,18 +43,18 @@ void s() {
 	cout << sig01 << endl;
 
 	//import the private key and n
-	std::ifstream publicKeyFile;
-	publicKeyFile.open("e_n.txt");
+	std::ifstream privateKeyFile;
+	privateKeyFile.open("d_n.txt");
 
 	//format d and n in mem registers to generate a signature
-	string e_str, n_str;
-	std::getline(publicKeyFile, e_str);
-	std::getline(publicKeyFile, n_str);
-	BigUnsigned publicKey = stringToBigUnsigned(e_str);
+	string d_str, n_str;
+	std::getline(privateKeyFile, d_str);
+	std::getline(privateKeyFile, n_str);
+	BigUnsigned privateKey = stringToBigUnsigned(d_str);
 	BigUnsigned n = stringToBigUnsigned(n_str);
 
 	//apply signature to output01
-	BigUnsigned signature01 = modexp(sig01, publicKey, n);
+	BigUnsigned signature01 = modexp(sig01, privateKey, n);
 	cout << "here is the big signature \n";
 	cout << signature01 << endl;
 
@@ -111,22 +111,24 @@ bool v() {
 	sigImportFile.close();
 
 	//import e_n.txt
-	std::ifstream privateKeyFile;
-	privateKeyFile.open("d_n.txt");
-	string privKeyStr, nStr;
-	std::getline(privateKeyFile, privKeyStr);
-	std::getline(privateKeyFile, nStr);
+	std::ifstream publicKeyFile;
+	publicKeyFile.open("e_n.txt");
+	string pubKeyStr, nStr;
+	std::getline(publicKeyFile, pubKeyStr);
+	std::getline(publicKeyFile, nStr);
 	cout << "here is the privateKey string: \n";
-	cout << privKeyStr << endl;
+	cout << pubKeyStr << endl;
 	cout << "here is the nStr string: \n";
 	cout << nStr << endl;
-	BigUnsigned privateKey = stringToBigUnsigned(privKeyStr);
+	BigUnsigned publicKey = stringToBigUnsigned(pubKeyStr);
 	BigUnsigned n = stringToBigUnsigned(nStr);
 	cout << "here is the privateKey after conversion to bigunsigned: \n";
+	cout << publicKey << endl;
 	cout << "here is the n after converstion to bigunsigned: \n";
-	privateKeyFile.close();
+	cout << n << endl;
+	publicKeyFile.close();
 
-	BigUnsigned decrypt = modexp(Signature, privateKey, n);
+	BigUnsigned decrypt = modexp(Signature, publicKey, n);
 	cout << "here's the decrypt: " << endl;
 	cout << decrypt << endl;
 
