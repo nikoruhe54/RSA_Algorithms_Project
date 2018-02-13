@@ -21,6 +21,7 @@ void sign(const char* fileName) {
 	std::ifstream inFile(fileName, std::ios::binary);
 	std::string data((std::istreambuf_iterator<char>(inFile)), std::istreambuf_iterator<char>());
 	if (data.empty()) {
+		//don't try to encrypt invalid/empty files
 		throw("the file entered is either Null or invalid");
 	}
 	inFile.close();
@@ -136,7 +137,7 @@ int main(int argc, char *argv[])
 		}
 	}
 	catch (string errorMsg) {
-		cout << errorMsg << endl;
+		cout << "invalid file name or empty file" << endl;
 	}
 
 	return 0;
