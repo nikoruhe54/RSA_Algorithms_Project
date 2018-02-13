@@ -74,7 +74,7 @@ bool verify(string inputFileName, string signatureFileName) {
 
 	//import the signature file made with the private key
 	std::ifstream sigImportFile;
-	sigImportFile.open(signatureFileName);
+	sigImportFile.open("file.txt.signature");
 
 	//get the signature into a mem register
 	string signatureStr;
