@@ -15,8 +15,8 @@ using std::cout;
 using std::endl;
 
 void s() {
-	//std::string filename = "test.png";
-	std::string filename = "test.txt"; //test.jpg test.png etc.
+	std::string filename = "test.png";
+	//std::string filename = "test.txt"; //test.jpg test.png etc.
 	std::ifstream myfile(filename.c_str(), std::ios::binary);
 	std::streampos begin, end;
 	begin = myfile.tellg();
@@ -70,7 +70,7 @@ void s() {
 }
 
 bool v() {
-	std::string filename = "test02.txt";
+	std::string filename = "test.png";
 	//std::string filename = "test.txt"; //test.jpg test.png etc.
 	std::ifstream myfile(filename.c_str(), std::ios::binary);
 	std::streampos begin, end;
@@ -146,10 +146,14 @@ int main(int argc, char *argv[])
 {
 	s();
 	if (v()) {
+		cout << "------------------------------\n";
 		cout << "the file has been unmodified \n";
+		cout << "------------------------------\n";
 	}
 	else {
+		cout << "------------------------------\n";
 		cout << "the file has been modified \n";
+		cout << "------------------------------\n";
 	}
 	return 0;
 }
