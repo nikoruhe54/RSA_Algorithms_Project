@@ -24,7 +24,7 @@ void s2() {
 	std::string filename = "test.png";
 	std::ifstream myfile(filename, std::ios::binary);
 	std::string data((std::istreambuf_iterator<char>(myfile)), std::istreambuf_iterator<char>());
-	myfile.close();
+	//myfile.close();
 
 	//string output01 = sha256(data);
 	
