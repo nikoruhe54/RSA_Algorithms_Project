@@ -86,7 +86,7 @@ int main() {
 	  //big2 = 5;
       std::cout << "my big2 !!!\n";
       std::cout << big2;
-	  std::cout << "\n";
+	  std::cout << "\n"; 
 	  std::cout << "The two numbers are both prime \n";
 
 	  std::ofstream outfile("p_q.txt");
