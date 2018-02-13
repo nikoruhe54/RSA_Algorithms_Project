@@ -58,8 +58,6 @@ bool testImageV() {
 	string output01 = sha256(data);
 	cout << output01 << endl;
 
-	string output01 = sha256(data);
-
 	//convert the SHA256 to a bigUnsigned
 	BigUnsigned sig01 = stringToBigUnsigned16(output01);
 	cout << "the Sha256(M) after converted to bigUnsigned is: \n";
