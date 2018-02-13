@@ -112,15 +112,15 @@ bool verify(string inputFileName, string signatureFileName) {
 	}
 }
 
-int main(int argc, string *argv[])
+int main(int argc, string argv[])
 {
 	try {
-		if (*argv[1] == "s") {
-			sign(*argv[2]);
+		if (argv[1] == "s") {
+			sign(argv[2]);
 		}
 
-		if (*argv[1] == "v") {
-			if (verify(*argv[2], *argv[3])) {
+		if (argv[1] == "v") {
+			if (verify(argv[2], argv[3])) {
 				cout << "------------------------------\n";
 				cout << "the file is authentic \n";
 				cout << "------------------------------\n";
