@@ -62,8 +62,72 @@ void s() {
 	signatureOutFile.close();
 }
 
+bool v() {
+	std::string filename = "test.txt"; //test.jpg test.png etc.
+	std::ifstream myfile(filename.c_str(), std::ios::binary);
+	std::streampos begin, end;
+	begin = myfile.tellg();
+	myfile.seekg(0, std::ios::end);
+	end = myfile.tellg();
+	std::streampos size = end - begin; //size of the file in bytes   
+	myfile.seekg(0, std::ios::beg);
+
+	char * memblock = new char[size];
+	myfile.read(memblock, size); //read the entire file
+	memblock[size] = '\0'; //add a terminator
+	myfile.close();
+
+	//check what's in the block
+	string str(memblock);
+	std::cout << str;
+	std::cout << "\nthe content \n";
+
+	string output01 = sha256(str);
+
+	//convert the SHA256 to a bigUnsigned
+	cout << "sha256('" << str << "'):" << output01 << endl;
+	BigUnsigned sig01 = stringToBigUnsigned(output01);
+
+	//import the signature file made with the private key
+	std::ifstream sigImportFile;
+	sigImportFile.open("file.txt.signature");
+
+	//get the signature into a mem register
+	string signatureStr;
+	std::getline(sigImportFile, signatureStr);
+	BigUnsigned Signature = stringToBigUnsigned(signatureStr);
+	sigImportFile.close();
+
+	//import e_n.txt
+	std::ifstream publicKeyFile;
+	publicKeyFile.open("e_n.txt");
+	string pubKeyStr, nStr;
+	std::getline(publicKeyFile, pubKeyStr);
+	std::getline(publicKeyFile, nStr);
+	BigUnsigned publicKey = stringToBigUnsigned(pubKeyStr);
+	BigUnsigned n = stringToBigUnsigned(nStr);
+	publicKeyFile.close();
+
+	BigUnsigned decrypt = modexp(Signature, publicKey, n);
+	cout << "here's the decrypt: " << endl;
+	cout << decrypt << endl;
+
+	if (decrypt == sig01) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 int main(int argc, char *argv[])
 {
 	s();
+	if (v()) {
+		cout << "the file has been unmodified \n";
+	}
+	else {
+		cout << "the file has been modified \n";
+	}
 	return 0;
 }
