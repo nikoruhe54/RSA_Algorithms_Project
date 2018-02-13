@@ -70,7 +70,7 @@ void s() {
 }
 
 bool v() {
-	std::string filename = "test03.jpg";
+	std::string filename = "test04.jpg";
 	//std::string filename = "test.txt"; //test.jpg test.png etc.
 	std::ifstream myfile(filename.c_str(), std::ios::binary);
 	std::streampos begin, end;
