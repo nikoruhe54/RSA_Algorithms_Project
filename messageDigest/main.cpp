@@ -18,7 +18,7 @@ using std::endl;
 
 void sign(string fileName) {
 	//import the message file as a binary stream
-	std::ifstream inFile(fileName, std::ios::binary);
+	std::ifstream inFile("test.txt", std::ios::binary);
 	std::string data((std::istreambuf_iterator<char>(inFile)), std::istreambuf_iterator<char>());
 	inFile.close();
 	
@@ -59,7 +59,7 @@ void sign(string fileName) {
 
 bool verify(string inputFileName, string signatureFileName) {
 	//import the "MOST DEFINITELY AUTHENTIC message file" as a binary stream
-	std::ifstream inFile(inputFileName, std::ios::binary);
+	std::ifstream inFile("test.txt", std::ios::binary);
 	std::string data((std::istreambuf_iterator<char>(inFile)), std::istreambuf_iterator<char>());
 	inFile.close();
 
