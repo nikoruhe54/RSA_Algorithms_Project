@@ -164,7 +164,6 @@ int main(int argc, char *argv[])
 		cout << "------------------------------\n";
 	}
 	*/
-	//testImage();
-	s2();
+	testImage();
 	return 0;
 }
