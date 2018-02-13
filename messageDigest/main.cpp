@@ -17,8 +17,9 @@ using std::endl;
 void testImage() {
 	std::ifstream fin("test.png", std::ios::binary);
 	std::string data((std::istreambuf_iterator<char>(fin)), std::istreambuf_iterator<char>());
-	//fin.close();
-	//string output01 = sha256(data);
+	fin.close();
+	string output01 = sha256(data);
+	cout << output01 << endl;
 }
 
 void s() {
