@@ -1,11 +1,12 @@
 // You need to complete this program for a part of your first project.
 //
 // Niko Ruhe
-// RSA Project Part I
+// RSA Project 1 Part 1
 // Dr. Duan
 // Algorithms Class
 // Spring2018
-//
+// 02/14/2018
+
 // Standard libraries
 #include <string>
 #include <iostream>
@@ -16,8 +17,9 @@
 // `BigIntegerLibrary.hh' includes all of the library headers.
 #include "BigIntegerLibrary.hh"
 
+// checks to see if fermat test results in a likely prime number
 bool fermat(BigUnsigned maybePrime, BigInteger a1, BigInteger a2) {
-	/* use this test to determine if the number is prime */
+	// use this test to determine if the number is prime
 	BigUnsigned answer = modexp(a1, maybePrime - 1, maybePrime);
 	if (answer == 1) {
 		answer = modexp(a2, maybePrime- 1, maybePrime);
@@ -50,9 +52,11 @@ int main() {
       BigUnsigned big1 = BigUnsigned(1);
 	  BigInteger a1 = 2, a2 = 7;
 	  while (1) {
+		  //use 278 digits to get a number at least 1024 bits
 		  for (int i = 0; i < 278; i++) {
 			  big1 = big1 * 10 + (rand() % 10);
 		  }
+		  //force the number to end in 7 (more likely to hit primes, and reduce search time)
 		  big1 = (big1 * 10) + 7;
 
 		  if (fermat(big1, a1, a2)) {
@@ -70,9 +74,11 @@ int main() {
 	  std::cout << "\n";
       BigUnsigned big2 = BigUnsigned(1);
 	   while (1) {
+		   //use 278 digits to get a number at least 1024 bits
 		  for (int i = 0; i < 278; i++) {
 			  big2 = big2 * 10 + (rand() % 10);
 		  }
+		  //force the number to end in 7 (more likely to hit primes, and reduce search time)
 		  big2 = (big2 * 10) + 7;
 		  if (fermat(big2, a1, a2)) {
 			  //big2 is prime, move on
@@ -95,7 +101,7 @@ int main() {
 	  outfile.close();
 
 	  BigUnsigned a = (big1 - 1) * (big2 - 1);
-	  std::cout << "a = (big1 - 1) * (big2 - 1) \n";
+	  std::cout << "The totient is a = (big1 - 1) * (big2 - 1) \n";
 	  std::cout << a << std::endl;
 	  //test case
 	  //a = 40;
@@ -105,8 +111,11 @@ int main() {
 	  //n = 55;
       std::cout << n;
 	  std::cout << std::endl;
-
+	  
+	  //I use a common public key of 65537. It is relatively prime to the totient
+	  //I check that later to confirm with my checkE function
 	  BigUnsigned e = 65537; //prime number stored as public key
+	  
 	  //test case
 	  //e = 7;
 
@@ -118,29 +127,23 @@ int main() {
 	          std::cout << "Bad Public Key \n";
 	  }
 
+	  //calculate the private key by using modinv and extended euclidean of public key and totient
 	  BigUnsigned d = modinv(e, a);
-
-	  if (d < a) {
-		  std::cout << "The public key is less than the totient, good \n";
-	  }
 
 	  std::cout << "The private key is: \n";
 	  std::cout << d;
 
+	  //output the public key
 	  std::ofstream outfile2("e_n.txt");
 	  outfile2 << e << std::endl;
 	  outfile2 << n << std::endl;
 	  outfile2.close();
 
+	  //output the private key
 	  std::ofstream outfile3("d_n.txt");
 	  outfile3 << d << std::endl;
 	  outfile3 << n << std::endl;
 	  outfile3.close();
-
-	  /*
-      std::cout << "my big3/big2 !!!\n";
-      std::cout <<big3/big2;
-	  */
       
 	} catch(char const* err) {
 		std::cout << "The library threw an exception:\n"
