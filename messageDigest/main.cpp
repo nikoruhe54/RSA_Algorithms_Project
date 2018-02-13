@@ -53,8 +53,6 @@ void s() {
 
 	//apply signature to output01
 	BigUnsigned signature01 = modexp(sig01, privateKey, n);
-	cout << "here's the signature \n";
-	cout << signature01 << endl;
 
 	//save the signature to a file
 	std::ofstream signatureOutFile("file.txt.signature");
@@ -84,9 +82,12 @@ bool v() {
 
 	string output01 = sha256(str);
 
+
 	//convert the SHA256 to a bigUnsigned
-	cout << "sha256('" << str << "'):" << output01 << endl;
+	//cout << "sha256('" << str << "'):" << output01 << endl;
 	BigUnsigned sig01 = stringToBigUnsigned(output01);
+	cout << "the Sha256(M) is: \n";
+	cout << sig01 << endl;
 
 	//import the signature file made with the private key
 	std::ifstream sigImportFile;
