@@ -14,6 +14,11 @@ using std::string;
 using std::cout;
 using std::endl;
 
+void testImage() {
+	std::ifstream fin("test.png", std::ios::binary);
+	std::string data((std::istreambuf_iterator<char>(fin)), std::istreambuf_iterator<char>());
+	cout << data << endl;
+}
 void s() {
 	std::string filename = "test03.jpg";
 	//std::string filename = "test.txt"; //test.jpg test.png etc.
@@ -144,6 +149,7 @@ bool v() {
 
 int main(int argc, char *argv[])
 {
+	/*
 	s();
 	if (v()) {
 		cout << "------------------------------\n";
@@ -155,5 +161,7 @@ int main(int argc, char *argv[])
 		cout << "the file has been modified \n";
 		cout << "------------------------------\n";
 	}
+	*/
+	testImage();
 	return 0;
 }
