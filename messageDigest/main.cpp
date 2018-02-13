@@ -52,7 +52,7 @@ void testImage() {
 }
 
 bool testImageV() {
-	std::ifstream fin("test03.jpg", std::ios::binary);
+	std::ifstream fin("test04.jpg", std::ios::binary);
 	std::string data((std::istreambuf_iterator<char>(fin)), std::istreambuf_iterator<char>());
 	fin.close();
 	string output01 = sha256(data);
