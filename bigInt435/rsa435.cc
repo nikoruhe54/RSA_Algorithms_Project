@@ -95,6 +95,8 @@ int main() {
 	  outfile.close();
 
 	  BigUnsigned a = (big1 - 1) * (big2 - 1);
+	  std::cout << "a = (big1 - 1) * (big2 - 1) \n";
+	  std::cout << a << std::endl;
 	  //test case
 	  //a = 40;
       std::cout << "n = big1*big2 !!!\n";
