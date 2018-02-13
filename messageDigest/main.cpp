@@ -18,7 +18,8 @@ using std::endl;
 
 void sign(string fileName) {
 	//import the message file as a binary stream
-	std::ifstream inFile("test.txt", std::ios::binary);
+	string Hello = "test.txt";
+	std::ifstream inFile(Hello, std::ios::binary);
 	std::string data((std::istreambuf_iterator<char>(inFile)), std::istreambuf_iterator<char>());
 	inFile.close();
 	
