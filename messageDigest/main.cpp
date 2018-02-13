@@ -115,7 +115,6 @@ bool verify(const char* inputFileName, const char* signatureFileName) {
 int main(int argc, char *argv[])
 {
 	try {
-		/*
 		if (*argv[1] == 's') {
 			sign(argv[2]);
 		}
@@ -131,10 +130,6 @@ int main(int argc, char *argv[])
 				cout << "the file has been modified \n";
 				cout << "------------------------------\n";
 			}
-		}
-		*/
-		for (int i = 1; i < argc; i++) {
-			cout << argv[i] << endl;
 		}
 	}
 	catch (string errorMsg) {
