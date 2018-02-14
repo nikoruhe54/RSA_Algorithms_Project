@@ -41,6 +41,32 @@ BigUnsigned checkE(BigUnsigned phi, BigUnsigned e) {
 	return checkE(e, phi % e);
 }
 
+void makeLargePrime(BigUnsigned& bigNum, BigInteger a1, BigInteger a2) {
+	while (1) {
+		//use 278 digits to get a number at least 1024 bits
+		for (int i = 0; i < 278; i++) {
+			bigNum = bigNum * 10 + (rand() % 10);
+		}
+		//force the number to end in 7 (more likely to hit primes, and reduce search time)
+		bigNum = (bigNum * 10) + 7;
+
+		if (fermat(bigNum, a1, a2)) {
+			//big1 is prime, move on
+			break;
+		}
+		else {
+			bigNum = BigUnsigned(1);
+		}
+	}
+}
+
+void makeOutputFile(char* fileName, BigUnsigned num1, BigUnsigned num2) {
+	std::ofstream outfile(fileName);
+	outfile << num1 << std::endl;
+	outfile << num2 << std::endl;
+	outfile.close();
+}
+
 int main() {
 	/* The library throws `const char *' error messages when things go
 	 * wrong.  It's a good idea to catch them using a `try' block like this
@@ -51,73 +77,42 @@ int main() {
       std::cout << "a couple of test cases for 3460:435/535 Algorithms!!!\n";
       BigUnsigned big1 = BigUnsigned(1);
 	  BigInteger a1 = 2, a2 = 7;
-	  while (1) {
-		  //use 278 digits to get a number at least 1024 bits
-		  for (int i = 0; i < 278; i++) {
-			  big1 = big1 * 10 + (rand() % 10);
-		  }
-		  //force the number to end in 7 (more likely to hit primes, and reduce search time)
-		  big1 = (big1 * 10) + 7;
+	  
+	  makeLargePrime(big1, a1, a2);
 
-		  if (fermat(big1, a1, a2)) {
-			  //big1 is prime, move on
-			  break;
-		  }
-		  else {
-			  big1 = BigUnsigned(1);
-		  }
-	  }
 	  //test case
 	  //big1 = 11;
       std::cout << "my big1 !!!\n";
       std::cout << big1;
 	  std::cout << "\n";
-      BigUnsigned big2 = BigUnsigned(1);
-	   while (1) {
-		   //use 278 digits to get a number at least 1024 bits
-		  for (int i = 0; i < 278; i++) {
-			  big2 = big2 * 10 + (rand() % 10);
-		  }
-		  //force the number to end in 7 (more likely to hit primes, and reduce search time)
-		  big2 = (big2 * 10) + 7;
-		  if (fermat(big2, a1, a2)) {
-			  //big2 is prime, move on
-			  break;
-		  }
-		  else {
-			  big2 = BigUnsigned(1);
-		  }
-	  }
+	  BigUnsigned big2 = BigUnsigned(1);
+
+	  makeLargePrime(big2, a1, a2);
+
 	  //test case
 	  //big2 = 5;
       std::cout << "my big2 !!!\n";
       std::cout << big2;
 	  std::cout << "\n"; 
 	  std::cout << "The two numbers are both prime \n";
+	  
+	  //output the prime numbers files
+	  makeOutputFile("p_q.txt", big1, big2);
 
-	  std::ofstream outfile("p_q.txt");
-	  outfile << big1 << std::endl;
-	  outfile << big2 << std::endl;
-	  outfile.close();
-
+	  //calculate the totient
 	  BigUnsigned a = (big1 - 1) * (big2 - 1);
 	  std::cout << "The totient is a = (big1 - 1) * (big2 - 1) \n";
 	  std::cout << a << std::endl;
-	  //test case
-	  //a = 40;
+
+	  //calculate the modulus
       std::cout << "n = big1*big2 !!!\n";
       BigUnsigned n = big1*big2;
-	  //test case
-	  //n = 55;
       std::cout << n;
 	  std::cout << std::endl;
 	  
 	  //I use a common public key of 65537. It is relatively prime to the totient
 	  //I check that later to confirm with my checkE function
 	  BigUnsigned e = 65537; //prime number stored as public key
-	  
-	  //test case
-	  //e = 7;
 
 	  //check to see if e is relatively prime to a (the totient)
 	  if (checkE(a, e) == 1) {
@@ -134,16 +129,10 @@ int main() {
 	  std::cout << d;
 
 	  //output the public key
-	  std::ofstream outfile2("e_n.txt");
-	  outfile2 << e << std::endl;
-	  outfile2 << n << std::endl;
-	  outfile2.close();
+	  makeOutputFile("e_n.txt", e, n);
 
 	  //output the private key
-	  std::ofstream outfile3("d_n.txt");
-	  outfile3 << d << std::endl;
-	  outfile3 << n << std::endl;
-	  outfile3.close();
+	  makeOutputFile("d_n.txt", d, n);
       
 	} catch(char const* err) {
 		std::cout << "The library threw an exception:\n"
@@ -152,5 +141,3 @@ int main() {
 
 	return 0;
 }
-
-
