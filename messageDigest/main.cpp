@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
 			sign(argv[2]);
 		}
 
-		if (*argv[1] == 'v') {
+		else if (*argv[1] == 'v') {
 			if (verify(argv[2], argv[3])) {
 				cout << "------------------------------\n";
 				cout << "the file is authentic \n";
@@ -138,6 +138,13 @@ int main(int argc, char *argv[])
 				cout << "the file has been modified \n";
 				cout << "------------------------------\n";
 			}
+		}
+		else {
+			cout << "you have entered an incorrect action. please either sign (s) or verify (v)" << endl;
+			cout << "the format for signing a file is: " << endl;
+			cout << "./sha256 s <fileToLoad>" << endl << endl;
+			cout << "the format for verifying a signature is: " << endl;
+			cout << "./sha256 v <fileToLoad> <signatureToLoad>" << endl;
 		}
 	}
 	catch (string errorMsg) {
